@@ -1,0 +1,114 @@
+\documentclass{article}
+
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+
+\setlength\parindent{0pt}
+
+\newcommand{\workitem}[4]{\item \textsc{#1} (#4) \vskip -3pt #2\vskip -3pt #3}
+\newcommand{\exercise}[1]{\item[\textbf{#1}]}
+\newcommand{\solution}{\vskip 1.5em}
+\newcommand{\set}[1]{\left\{\,#1\,\right\}}
+\newcommand{\divopt}{\,\big|\,}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\inv}{^{-1}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\DeclareMathOperator{\incomp}{||}
+
+
+\pagestyle{empty}
+
+\begin{document}
+\begin{center}
+
+\textbf{Probablistic Combinatorial Games}
+
+\begin{itemize}
+    \exercise{Overview.} Probablistic combinatorial games (PCGs) are an extension of
+    combinatorial games allowing probabilistic moves to occur.  In particular,
+    PCGs are two player games where each player takes turn making moves.  Each player has \textit{complete information}, knowing all moves
+    available to them and to their opponents.  Games are won using the \textit{normal play} convention,
+    where the last player to make a move is the winner of the game.  The key difference in PCGs as
+    opposed to Classic combinatorial games (CCGs) is that rather than selecting a from an array of game options,
+    players select a distribution of possible game states, after which a state is chosen at random from the distribution.
+
+    \solution
+    \exercise{Definition.}
+    We define a game $G$ as
+    $$
+        G = \set{G_L\divopt G_R}\,.
+    $$
+    where $G_L$ is a typical left option of $G$ and $G_R$ is a typical right option of $G$.
+    As stated previously, $G_L$ and $G_R$ are not single game states, but rather a distribution of the form
+    $$
+        D = [ (D_1, p_1), (D_2, p_2), \ldots, (D_n, p_n) ]\,,\quad\text{where $\sum_i p_i = 1$.}
+    $$
+    The states $D_i$ are referred to as a \textit{typical option} of $D$ and $p_i$ is a \textit{typical probability} of $D$.
+
+    A game is played by either the \textit{\textbf{L}eft} player or the \textit{\textbf{R}ight} player selecting
+    one of their options distributions, and the game state is then chosen at random from the distribution.
+    A player loses when they cannot make a movee.
+
+    Note that this definition encompasses the theory of CCGs, since we can merely let $p_1 = 1$.  This means
+    that all the games we are used to appear, including the zero and all of the dyadic rationals.
+
+
+    \solution
+    \exercise{Algebra.}
+    $$
+        G + H = \set{ G_L + H, G + H_L \divopt G_R + H, G + H_R }
+    $$
+    $$
+        D + G = [(D_i + G, p_i)] \quad \text{and} \quad G + D = [(G + D_i, p_i)]
+    $$
+    $$
+        -G = \set{ -G_R \divopt -G_L }
+    $$
+    $$
+        -D = [(-D_i, p_i)]
+    $$
+    $$
+    G - H = G + (-H) = \set{ G_L - H, G - H_R \divopt G_R - H, G - H_L }
+    $$
+
+    \solution
+    \exercise{$P_L$ and $P_R$.}
+    The $P_L$ and $P_R$ functions are defined as follows
+    $$
+    \begin{aligned}
+        P_L(G) &= \max\set{0, P_R(G_L)} &\quad P_R(G) &= \min\set{1, P_L(G_R) }  \\
+        P_L(D) &= \sum_{i} p_i P_L(G_i) &\quad P_R(D) &= \sum_{i} p_i P_R(G_i) \\
+    \end{aligned}
+    $$
+
+    \solution
+    \exercise{Ordering.}
+    We can use $P_L$ and $P_R$ as indicator functions to define $G > 0$, $G < 0$, $G = 0$, and $G \incomp 0$.
+
+    $$
+    \begin{tabular}{c c c}
+        \hline
+        $P_L(G)$ & $P_R(G)$ & \\
+        \hline
+        1 & 1 & $G > 0$ \\
+        0 & 1 & $G = 0$ \\
+        1 & 0 & $G \incomp 0$ \\
+        0 & 0 & $G < 0$ \\
+        \hline
+    \end{tabular}
+    $$
+
+    Note that $G \ge 0$ iff $P_R(G) = 1$ and $G \le 0$ iff $P_L(G) = 0$.  It follows that $G \le H$ iff
+    $P_L(G - H) = 0$.  Using the definitions of $P_L$ and $P_R$, we can derive the usual definition of $G \le H$
+    for combinatorial games.
+    $$
+        G \le H \iff P_L(G - H) = 0 \iff \max\set{0, P_R(G_L - H), P_R(G - H_R)} = 0\,.
+    $$
+    That is no $P_R(G_L - H)$ nor $P_R(G - H_R)$ is greater than 0, so no $G_L \ge H$ and no $G \ge H_R$
+\end{itemize}
+
+\end{center}
+\end{document}
