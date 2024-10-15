@@ -12,6 +12,7 @@
 \newcommand{\exercise}[1]{\item[\textbf{#1}]}
 \newcommand{\solution}{\vskip 1.5em}
 \newcommand{\set}[1]{\left\{\,#1\,\right\}}
+\newcommand{\suchthat}{\,\big|\,}
 \newcommand{\divopt}{\,\big|\,}
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\inv}{^{-1}}
@@ -50,17 +51,29 @@
 
     A game is played by either the \textit{\textbf{L}eft} player or the \textit{\textbf{R}ight} player selecting
     one of their options distributions, and the game state is then chosen at random from the distribution.
-    A player loses when they cannot make a movee.
+    A player loses when they cannot make a move.
 
     Note that this definition encompasses the theory of CCGs, since we can merely let $p_1 = 1$.  This means
     that all the games we are used to appear, including the zero and all of the dyadic rationals.
 
+    For notational convenience we will treat a game $G$ as a distribution $[ (G, 1) ]$ if it is
+    used where a distribution is required, and simiarly a distribution $D$ of the form
+    $D = [(G, 1)]$ will be treated as a game if it is used where a game is required.
+
 
     \solution
     \exercise{Algebra.}
+    The sum of two games $G$ and $H$ is defined as
     $$
-        G + H = \set{ G_L + H, G + H_L \divopt G_R + H, G + H_R }
+        G + H = \set{ G_L + H, G + H_L \divopt G_R + H, G + H_R }\,.
     $$
+
+    The sum of two distributions $D = [(D_i, p_i)]$ and $F = [(F_j, q_j)]$ is defined as
+    $$
+        D + F = [(D_i + F_j, \sum_{\substack{k,l \\ D_i + P_j = D_k + F_l}} p_k q_l)]\,.
+    $$
+
+    The sum of a distribution $D$ and a game $G$ is defined as
     $$
         D + G = [(D_i + G, p_i)] \quad \text{and} \quad G + D = [(G + D_i, p_i)]
     $$
